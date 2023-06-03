@@ -1,0 +1,23 @@
+div.modal#login-modal.animate__animated.animate__zoomIn
+ div.modal-dialog.modal-lg.modal-dialog-centered
+  div.modal-content
+   div.modal-body.p-5
+     div.row 
+      div.col-md-6.d-flex.align-items-center.justify-center
+       img(src="images/signup.svg" width="100%")
+      div.col-md-6 
+       h1.display-4.md-4(style='font-size:25px') Welcome !
+       form(action="" autocomplete="off")#login-form
+        div.form-group.mb-4
+         input.form-control.p-4(type="email" name="email" placeholder="Email" class="username") 
+         span.text-danger.username-error 
+        div.form-group.mb-4
+         input.form-control.p-4(type="password" name="password" placeholder="Passowrd" class="company-password")
+         span.text-danger.password-error  
+        div.form-group.mb-4
+         button.btn.login-btn(type="submit" style="background-color:#377DFF;color:white;") Login
+         button.btn.btn-danger.disabled.d-none.before-send
+          span.spinner-grow.spinner-grow-sm.mr-2
+          span Processing 
+        p New user ? 
+         a(href="#")#request-signup-modal Create an account

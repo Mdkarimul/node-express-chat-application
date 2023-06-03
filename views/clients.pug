@@ -1,0 +1,75 @@
+
+extends profile.pug
+block loadStyle 
+ link(rel="stylesheet" href="stylesheets/clients.css")
+
+block loadScript
+ script(src="javascripts/clients.js")
+
+block content
+ - const skeleton = [0,1,2,3,4]; 
+  p.medium-font.p-0 clients
+  div.card.container-fluid.p-3.border-none
+   div.card-body
+    div.row
+     div.col-md-4
+      div.d-flex.align-items-center
+       button.btn.icon-btn-info.mr-3.filter-btn
+        i.fa.fa-cog.fa-spin 
+       input.form-control.input.remove-focus.border.filter.filter-by-name(placeholder="Search by name")
+     div.col-md-5 
+     div.col-md-3.text-right
+      button.btn.btn-light.mr-3 Export
+      button.btn.btn-primary#add_client_btn Add clients
+    table.table.my-4
+     tr 
+      th Client 
+      th Email 
+      th Mobile  
+      th Status  
+      th Date  
+      th Action  
+     
+     each data of skeleton 
+      tr.d-none.client-skeleton
+       td(colspan="6").py-3 
+        div.d-flex
+         div.mr-3.d-flex.align-items-center
+          div.skeleton#client-pic
+           div.skeleton-loader
+         div.d-flex.w-100.flex-column
+          div.skeleton.mb-2#client-title
+           div.skeleton-loader
+          div.skeleton#client-subtitle
+           div.skeleton-loader
+    div.btn-group.float-right
+     button.btn.border#prev(disabled="disabled")  Prev 
+     div.btn-group#client-pagination
+     button.btn.border#next  Next 
+           
+
+     
+  div.modal.animate__animated.animate__slideInDown.animate__faster#clientModal
+   div.modal-dialog.modal-dialog-centered
+    div.modal-content.border-none
+     div.modal-body.px-4.py-3
+      h4.medium-font.mb-4 Clients Details
+      form#client_form
+       div.form-group.mb-4
+        input.input.form-control.remove-focus.border(type="text" name="clientName" placeholder="Client name" required="required")
+       
+       div.form-group.mb-4
+        input.input.form-control.remove-focus.border#addClientEmail(type="email" name="clientEmail" placeholder="Email" required="required") 
+
+       div.form-group.mb-4
+        input.input.form-control.remove-focus.border#country(type="text" name="clientCountry" placeholder="Country" required="required")  
+
+       div.form-group.mb-4.d-flex
+        button.btn.btn-light.mr-2#code(type="button") +91
+        input.input.form-control.remove-focus.border(type="number" name="clientMobile" placeholder="Mobile" required="required")   
+       div.form-group.mb-4.d-flex
+        button.btn.btn-primary.add-client-submit(type="submit") Submit      
+        button.btn.btn-design.d-none.add-client-loader(disabled="disabled")
+         span.spinner-grow.spinner-grow-sm.mr-2
+         span Processing
+  div.tmp

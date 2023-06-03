@@ -1,0 +1,28 @@
+doctype html 
+html 
+ head 
+  title Homepage 
+  include bootstrap 
+  script(src="javascripts/profile.js")
+  block loadScript 
+  block loadStyle
+  link(rel="stylesheet", href="stylesheets/profile.css")
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css")
+ body(style="background:#F2F2F2")
+  - const toolbar = [{label:"Clients",icon:"fas fa-user-secret",link:"/clients"},{label:"Teams",icon:"fas fa-users",link:"/teams"},{label:"Logout",icon:"fa fa-sign-out-alt",link:"/logout"}]
+   div 
+    div.sidenav.sidenav-open
+    div.section.section-open
+     nav.navbar.navbar-expand-sm.bg-white.px-3.py-3
+       button.btn.toggler
+        l.fa.fa-align-left
+       ul.navbar-nav.ml-auto
+        each menu of toolbar 
+         li.nav-item
+          button.btn.toolbar.ml-2.p-0
+           a.nav-link(href=menu.link title=menu.label)
+            i(class=menu.icon)
+     div.px-4.py-3
+      block content
+    
+     
