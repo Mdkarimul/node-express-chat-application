@@ -12,7 +12,7 @@ router.post("/", async (request,response)=>{
       endpoint : request.get('origin'),
       api : "/api/private/company",
       data : token
-  })
+  });
   //requesting user api
   if(company_res.body.isCompanyCreated)
   {

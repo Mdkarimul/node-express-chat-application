@@ -47,12 +47,13 @@ $(document).ready(function(){
          },
 
          error : function(error){
+            console.log(error);
          if(error.status==409)
          {
             $(".before-send").addClass("d-none");
             $(".signup-btn").removeClass("d-none");
         const data = JSON.parse(error.responseJSON.text);
-        console.log(data);
+
          const field = "."+data.message.field;
          const message = data.message.label;
          $(field).addClass("border border-danger");
@@ -104,6 +105,7 @@ $(document).ready(function(){
          },
 
          error : function(error){
+            console.log(error);
             $(".before-send").addClass("d-none");
             $(".login-btn").removeClass("d-none");
          if(error.status==404)

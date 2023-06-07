@@ -22,8 +22,7 @@ if(token.isVerified)
   token.data['token'] = newToken;
   token.data['expiresIn'] = 86400;
   token.data['isLogged'] = true;
-        //end auto login during signup
-
+   //end auto login during signup
      const user_res = await  databaseService.createRecord(token.data,'user');
      response.status(200);
      response.json({

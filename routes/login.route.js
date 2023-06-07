@@ -14,11 +14,11 @@ const company_res =await httpService.getRequest({
     api : "/api/private/company",
     data : token
 });
-if(company_res._body.isCompanyExit)
+if(company_res.body.isCompanyExit)
 {
  const query ={ 
      body : {
-        uid : company_res._body.data[0]._id
+        uid : company_res.body.data[0]._id
      },
      endpoint : request.get("origin"),
      api : "/api/private/user",
@@ -31,23 +31,21 @@ if(company_res._body.isCompanyExit)
     api : "/api/private/user",
     data : uidToken
 });
- if(password_res._body. isCompanyExit)
+ if(password_res.body.isCompanyExit)
  {
      //allow single device
-     /*
-     if(password_res._body.data[0].isLogged)
-     {
-         response.status(406);
-         response.json({
-             message  : 'Please logout from other device !'
-         });
-         return false;
-     }
-     */
-     const realPassword = password_res._body.data[0].password;
-     console.log(realPassword);
+     
+    //  if(password_res._body.data[0].isLogged)
+    //  {
+    //      response.status(406);
+    //      response.json({
+    //          message  : 'Please logout from other device !'
+    //      });
+    //      return false;
+    //  }
+     
+     const realPassword = password_res.body.data[0].password;
     const isLogged = await bcryptService.decrypt(realPassword,request.body.password);
-    console.log(isLogged);
     if(isLogged)
     {
         const secondsInOneDay =86400;
@@ -58,7 +56,7 @@ if(company_res._body.isCompanyExit)
            api : "/api/private/user",
            data : authToken
        });
-        response.cookie("authToken",authToken,{maxAge:(secondsInOneDay*1000)});
+         response.cookie("authToken",authToken,{maxAge:(secondsInOneDay*1000)});//convert milisecond in second
         response.status(200);
         response.json({
             isLogged  :true,
@@ -77,13 +75,13 @@ if(company_res._body.isCompanyExit)
  else
  {
      response.status(password_res.status);
-     response.json(password_res._body);
+     response.json(password_res.body);
  }
 }
 else
 {
     response.status(company_res.status);
-    response.json(company_res._body);
+    response.json(company_res.body);
 }
 });
 

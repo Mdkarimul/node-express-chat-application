@@ -20,7 +20,7 @@ const refreshToken =async (uid,request)=>{
  await databaseService.updateByQuery(uid,"user",updateMe);
  return newToken;
 }
-const checkUserLog =async (request,response)=>{
+const checkUserLog = async (request,response)=>{
  const token_data = await tokenService.verify_token(request);
  if(token_data.isVerified)
  {

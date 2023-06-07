@@ -8,12 +8,15 @@ const schemaList = {
     user : userSchema,
     client : clientSchema
 }
-const url = "mongodb+srv://wap:0qe9AWkbUSgtlJXI@cluster0.joeem.mongodb.net/frontwap?retryWrites=true&w=majority";
+const url = "mongodb://localhost:27017/frontwap";
 const option = {
  useNewUrlParser :true,
  useUnifiedTopology : true,
+ family:4
 };
 mongo.connect(url,option);
+
+
 const createRecord =async (data,schema)=>{
   const c_schema =   schemaList[schema];
 const collection =  new c_schema(data);
