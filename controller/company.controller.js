@@ -22,7 +22,6 @@ const createCompany =async (request,response)=>{
       message : error
   });
   }
- 
    }
    else
    {

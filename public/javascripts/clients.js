@@ -24,10 +24,8 @@ $(document).ready(function(){
           const response  = await  ajax(request);
          const countryData =  JSON.stringify(response);
          localStorage.setItem("countryCode",countryData);
-        
         }
        
-
     });
 });
 
@@ -48,6 +46,7 @@ $(document).ready(function(){
    function addClient(){
     $(".add-client-form").submit(async function(e){
    e.preventDefault();
+   alert("add client btn");
   const token =  getCookie("authToken");
   const form_data = new FormData(this);
   form_data.append("token",token);
@@ -60,7 +59,6 @@ $(document).ready(function(){
        loader_btn : ".add-client-loader"
    }
    const response =  await ajax(request);
-   console.log(response);
    const client = response.data;
    const tr = dynamicTr(client);
    $("table").append(tr);
@@ -68,11 +66,12 @@ $(document).ready(function(){
    clientAction();
    try {
    const response =  await ajax(request);
-   console.log(response);
    $("#clientModal").modal("hide");
+   alert("try");
    }
    catch(error)
    {
+    console.log(error);
        $("#addClientEmail").addClass("animate__animated animate__shakeX text-danger");
        $("#addClientEmail").click(function(){
            $(this).removeClass("animate__animated animate__shakeX text-danger");
@@ -80,7 +79,7 @@ $(document).ready(function(){
        });
 
     $("#clientModal").modal("hide");
-  alert("Something is not right !");
+  alert(error.responseJSON.message);
 
    }
     });
@@ -154,6 +153,7 @@ function checkInLs(key){
 }
 
 function ajax(request){
+    alert("in ajax");
     return new Promise((resolve,reject)=>{
         let option  = {
             type : request.type,
@@ -339,7 +339,6 @@ function clientAction(){
                         token  : token
                     }
                 }
-
               const response = await  ajax(request);
               $(tr).removeClass('animate__animated animate__fadeIn');
               $(tr).addClass('animate__animated animate__fadeOut');
@@ -380,14 +379,11 @@ function clientAction(){
 
 
 //get pagination list
-
 async function  getPaginationList (){
-
 const request = {
     type : "GET",
     url  : "/clients/count-all"
 }
-
 const response =await ajax(request);
 
 const total_client = response.data;
@@ -398,7 +394,6 @@ if(length.toString().indexOf(".") != -1)
 {
     length = length+1;
 }
-
    for(i=1;i<=length;i++)
    {
       let button = `<button class='btn border paginate-btn ${i==1 ? "active" : "" }' data-skip="${dataSkip}">
@@ -407,18 +402,20 @@ if(length.toString().indexOf(".") != -1)
        $("#client-pagination").append(button);
        dataSkip = dataSkip+5;
    }
-
    getPaginationData();
 }
+
+
+
 
 function getPaginationData(){
     $(".paginate-btn").each(function(index){
         $(this).click(function(){
+            console.log(index);
             controlPrevNext(index);
             removeClasses("active");
             $(this).addClass("active");
             const skip = $(this).data('skip');
-            alert(skip);
             showClients(skip,5);
         });
     });
@@ -481,6 +478,7 @@ else
 
 //control filter
 $(document).ready(function(){
+    alert("from filter ");
     filterByName();
     $(".filter-btn").click(function(){
        if($(".filter").hasClass('filter-by-name'))

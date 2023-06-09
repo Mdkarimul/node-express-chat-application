@@ -102,7 +102,6 @@ const createLog =async (request,response)=>{
       response.json({
           message : "Update success !"
       });
-  console.log(request.body.token);
     }
     else
     {

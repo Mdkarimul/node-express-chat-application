@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const clientController = require("../controller/clients.controller");
+const { resource } = require("../app");
 
 
 router.get("/",(request,response)=>{

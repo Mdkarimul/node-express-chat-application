@@ -1,35 +1,35 @@
 const tokenService = require("../services/token.service");
 const databaseService = require("../services/database.service");
+
 const create =async (request,response)=>{
-  const tokenData =await tokenService.verify_token(request);  
-  if(tokenData.isVerified)
-  {
+   const tokenData =await tokenService.verify_token(request);  
+   if(tokenData.isVerified)
+   {
     const data = request.body;
     data['companyId'] = tokenData.data.uid;
-    try{  
-        const data_res = await databaseService.createRecord(data,"client");
-        response.status(200);
-        response.json({
-            message : "Record created !",
-            data : data_res
-        });
-    }catch(error)
-    {
-        response.status(409);
-        response.json({
-            message : "Record not created !",
-            error : error
-        });
+     try{  
+         const data_res = await databaseService.createRecord(data,"client");
+         response.status(200);
+         response.json({
+             message : "Record created !",
+             data : data_res
+         });
+     }catch(error)
+     {
+         response.status(409);
+         response.json({
+             message : "Record not created !",
+             error : error
+         });
     }
-   
-  }
-  else
-{
+   }
+   else
+ {
     response.status(401);
-    response.json({
-        message : "Permission denied !"
-    });
-}
+     response.json({
+         message : "Permission denied !"
+     });
+ }
 }
 
 
@@ -79,7 +79,7 @@ const deleteClient =async (request,response)=>{
     const tokenData =await tokenService.verify_token(request);  
     if(tokenData.isVerified)
     {
-        const id  =request.params.id;
+    const id  =request.params.id;
     const delete_res = await  databaseService.deleteById(id,'client');
     response.status(200);
     response.json({

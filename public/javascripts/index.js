@@ -45,7 +45,6 @@ $(document).ready(function(){
                 window.location="/profile";
             }
          },
-
          error : function(error){
             console.log(error);
          if(error.status==409)

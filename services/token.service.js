@@ -41,9 +41,7 @@ const verify_token = (request)=>{
     else
     {
       token = request.cookies.authToken;
-  
     }
- 
   }
   else
   {
